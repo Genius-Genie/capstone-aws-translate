@@ -1,0 +1,3 @@
+# Unique S3 bucket names (must be globally unique)
+request_bucket_name  = "capstone-request-yourname-2025"
+response_bucket_name = "capstone-response-yourname-2025"

@@ -1,0 +1,9 @@
+{
+  "SourceLanguage": "en",
+  "TargetLanguages": ["es", "fr", "de"],
+  "Texts": [
+    "Hello, how are you?",
+    "Good morning!",
+    "See you later."
+  ]
+}

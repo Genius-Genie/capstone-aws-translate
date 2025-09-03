@@ -1,0 +1,7 @@
+{
+  "SourceLanguage": "en",
+  "TargetLanguages": ["fr"],
+  "Texts": [
+    "Good morning", 
+    "How are you?"]
+}
