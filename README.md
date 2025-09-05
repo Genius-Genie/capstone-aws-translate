@@ -83,22 +83,21 @@ capstone-aws-translate/
    request_bucket_name  = "capstone-request-yourname-2025"
    response_bucket_name = "capstone-response-yourname-2025"
    ```
+   
+3. Package and deploy the Lambda:
 
-3. Deploy the infrastructure:
+   ```bash
+   cd ../lambda
+   Compress-Archive -Path lambda/* -DestinationPath infrastructure/lambda_package.zip -Force
+   cd ../infrastructure
+   ```
+
+4. Deploy the infrastructure:
 
    ```bash
    terraform init
    terraform validate
    terraform plan
-   terraform apply -auto-approve
-   ```
-
-4. Package and deploy the Lambda:
-
-   ```bash
-   cd ../lambda
-   zip -r ../lambda_package.zip *
-   cd ../infrastructure
    terraform apply -auto-approve
    ```
 
@@ -108,10 +107,11 @@ capstone-aws-translate/
    aws s3 cp ../samples/input_single.json s3://capstone-request-yourname-2025/
    ```
 
-6. Check the response bucket for a file starting with `translated_`:
+6. Check the response bucket for a file starting with `translated_`, download and open the response file in notepad:
 
    ```bash
    aws s3 ls s3://capstone-response-yourname-2025/
+   aws s3 cp s3://<capstone-response-yourname-2025>/translated_multi_input.json . ; notepad translated_multi_input.json
    ```
 
 ---
@@ -168,7 +168,7 @@ aws configure
 
 ```bash
 cd lambda
-zip -r ../lambda_package.zip *
+Compress-Archive -Path lambda/* -DestinationPath infrastructure/lambda_package.zip -Force
 cd ..
 ```
 
@@ -229,7 +229,7 @@ Check the response bucket for files prefixed with `translated_`.
 
 - Lifecycle rules: objects in both buckets expire automatically after 30 days.
 - Least-privilege IAM: Lambda can only read from the request bucket, write to the response bucket, call `translate:TranslateText`, and write logs.
-- Manual cleanup: Always run `terraform destroy` to avoid costs.
+- Manual cleanup: Always run `terraform destroy` to tear down your infrastructure (if for learning purposes) to avoid costs.
 
 ---
 
